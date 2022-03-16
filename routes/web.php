@@ -16,10 +16,14 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     // return inertia('Home'); //The same as below
-    return Inertia::render('Home', [
-        'name' => 'Timur',
-        'frameworks' => [
-            'Laravel', 'Vue', 'Inertia'
-        ]
-    ]);
+    return Inertia::render('Home');
+});
+
+Route::get('/users', function () {
+    sleep(1);
+    return Inertia::render('Users');
+});
+
+Route::get('/settings', function () {
+    return Inertia::render('Settings');
 });
