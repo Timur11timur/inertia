@@ -11,12 +11,9 @@
 </template>
 
 <script>
-import Layout from '../Shared/Layout';
 import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
-    layout: Layout,
-
     components: { Link },
 
     props: {
