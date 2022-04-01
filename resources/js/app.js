@@ -11,12 +11,15 @@ createInertiaApp({
 
         return page;
     },
+
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
             //.component("Link", Link) //Register component globally
             .mount(el)
     },
+
+    title: title => 'My app - ' + title
 });
 
 InertiaProgress.init({
