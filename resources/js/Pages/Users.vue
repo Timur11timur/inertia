@@ -1,5 +1,9 @@
 <template>
-    <h1 class="text-3xl">Users</h1>
+    <div class="flex justify-between mb-6">
+        <h1 class="text-3xl">Users</h1>
+
+        <input v-model="search" type="text" placeholder="Search..." class="border px-2 rounded-lg" />
+    </div>
 
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -39,18 +43,14 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from '../Shared/Pagination';
+import { ref, watch } from "vue";
 
-export default {
-    components: { Link, Pagination },
+defineProps({ time: String, users: Object });
 
-    props: {
-        time: String,
-        users: Object
-    }
-};
+let search = ref('');
 </script>
 
 <style scoped>
