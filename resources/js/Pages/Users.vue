@@ -47,10 +47,22 @@
 import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from '../Shared/Pagination';
 import { ref, watch } from "vue";
+import { Inertia } from "@inertiajs/inertia";
 
-defineProps({ time: String, users: Object });
+let props = defineProps({
+    time: String,
+    users: Object,
+    filters: Object
+});
 
-let search = ref('');
+let search = ref(props.filters.search);
+
+watch(search, value => {
+    Inertia.get('/users', { search: value}, {
+        preserveState: true, //do not refresh page during typing search word
+        replace: true //replace previous page if it was created by typing search word
+    });
+});
 </script>
 
 <style scoped>
