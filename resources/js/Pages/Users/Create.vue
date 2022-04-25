@@ -14,7 +14,8 @@
                    id="name"
                    required>
 
-            <div v-if="$page.props.errors.name" v-text="$page.props.errors.name" class="text-red-500 text-xs mt-1"></div>
+<!--            <div v-if="$page.props.errors.name" v-text="$page.props.errors.name" class="text-red-500 text-xs mt-1"></div>-->
+            <div v-if="form.errors.name" v-text="form.errors.errors.name" class="text-red-500 text-xs mt-1"></div>
         </div>
 
         <div class="mb-6">
@@ -27,7 +28,8 @@
                    id="email"
                    required>
 
-            <div v-if="errors.email" v-text="errors.email" class="text-red-500 text-xs mt-1"></div>
+<!--            <div v-if="errors.email" v-text="errors.email" class="text-red-500 text-xs mt-1"></div>-->
+            <div v-if="form.errors.email" v-text="form.errors.email" class="text-red-500 text-xs mt-1"></div>
         </div>
 
         <div class="mb-6">
@@ -40,30 +42,39 @@
                    id="password"
                    required>
 
-            <div v-if="errors.password" v-text="errors.password" class="text-red-500 text-xs mt-1"></div>
+<!--            <div v-if="errors.password" v-text="errors.password" class="text-red-500 text-xs mt-1"></div>-->
+            <div v-if="form.errors.password" v-text="form.errors.password" class="text-red-500 text-xs mt-1"></div>
         </div>
         <div class="mb-6">
-            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500">Submit</button>
+<!--            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" :disabled="processing">Submit</button>-->
+            <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" :disabled="form.processing">Submit</button>
         </div>
     </form>
 </template>
 
 <script setup>
-import {reactive} from "vue";
-import {Inertia} from "@inertiajs/inertia";
+//import { ref } from "vue";
+//import { Inertia } from "@inertiajs/inertia";
+import { useForm } from "@inertiajs/inertia-vue3";
 
 defineProps({
     errors: Object
 })
 
-let form = reactive({
+let form = useForm({
     name: '',
     email: '',
     password: ''
 });
 
+//let processing = ref(false);
+
 let submit = () => {
-    Inertia.post('/users', form);
+    form.post('/users');
+    // Inertia.post('/users', form, {
+    //     onStart: () => { processing.value = true },
+    //     onFinish: () => { processing.value = false }
+    // });
 }
 </script>
 
