@@ -52,6 +52,8 @@ import { Link } from '@inertiajs/inertia-vue3';
 import Pagination from '../../Shared/Pagination';
 import { ref, watch } from "vue";
 import { Inertia } from "@inertiajs/inertia";
+//import throttle from "lodash/throttle"; //send requests periodically
+import debounce from "lodash/debounce"; //send request only when you stop typing
 
 let props = defineProps({
     time: String,
@@ -61,14 +63,14 @@ let props = defineProps({
 
 let search = ref(props.filters.search);
 
-watch(search, value => {
+watch(search, debounce(function (value) {
     Inertia.get('/users',
         { search: value},
         {
             preserveState: true, //do not refresh page during typing search word
             replace: true //replace previous page if it was created by typing search word
         });
-});
+}, 300));
 </script>
 
 <style scoped>
