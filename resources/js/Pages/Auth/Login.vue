@@ -1,15 +1,16 @@
 <template>
     <Head title="Login Page" />
 
-    <h1 class="text-3xl">Login</h1>
-    <main>
-        <section class="bg-white p-8 rounded">
-            <form @submit.prevent="submit" class="max-w-md mx-auto mt-8">
+    <main class="grid place-items-center min-h-screen">
+        <section class="bg-white p-8 rounded-xl max-w-md mx-auto border">
+            <h1 class="text-3xl mb-6">Login</h1>
+
+            <form @submit.prevent="submit">
                 <div class="mb-6">
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                            for="email">Email</label>
 
-                    <input v-model="form.email " class="border border-gray-400 p-2 w-full"
+                    <input v-model="form.email " class="border p-2 w-full rounded"
                            type="email"
                            name="email"
                            id="email"
@@ -22,7 +23,7 @@
                     <label class="block mb-2 uppercase font-bold text-xs text-gray-700"
                            for="password">Password</label>
 
-                    <input v-model="form.password" class="border border-gray-400 p-2 w-full"
+                    <input v-model="form.password" class="border p-2 w-full rounded"
                            type="password"
                            name="password"
                            id="password"
@@ -51,4 +52,8 @@ let form = useForm({
    email: '',
    password: '',
 });
+
+let submit = () => {
+    form.post('/login');
+}
 </script>
