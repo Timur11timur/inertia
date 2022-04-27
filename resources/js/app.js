@@ -7,7 +7,10 @@ createInertiaApp({
     resolve: name => {
         let page = require(`./Pages/${name}`).default;
 
-        page.layout ??= Layout; //Each page become Layout. Only if is wasn't set (??=)
+        if (page.layout === undefined) {
+            page.layout = Layout; //Each page become Layout.
+        }
+
 
         return page;
     },
